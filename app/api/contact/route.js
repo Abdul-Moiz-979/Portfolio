@@ -12,7 +12,7 @@ export async function POST(request) {
   try {
     const { name, email, message } = await request.json();
 
-    // Validate required fields
+    // 1. Validate required fields
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: "All fields are required." },
@@ -20,7 +20,7 @@ export async function POST(request) {
       );
     }
 
-    // Validate email format
+    // 2. Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
@@ -29,16 +29,36 @@ export async function POST(request) {
       );
     }
 
+    // 3. Check for missing server-side environment variables
+    const requiredEnvVars = [
+      "EMAIL_HOST",
+      "EMAIL_PORT",
+      "EMAIL_USER",
+      "EMAIL_PASS",
+      "EMAIL_TO",
+    ];
+    const missingVars = requiredEnvVars.filter((v) => !process.env[v]);
+
+    if (missingVars.length > 0) {
+      console.error("❌ Missing Environment Variables:", missingVars.join(", "));
+      return NextResponse.json(
+        {
+          error: "Server configuration error.",
+          details: `Missing: ${missingVars.join(", ")}`,
+        },
+        { status: 500 }
+      );
+    }
+
     // Create a Nodemailer transporter
     const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
-      port: parseInt(process.env.EMAIL_PORT || "587"),
+      port: parseInt(process.env.EMAIL_PORT),
       secure: process.env.EMAIL_PORT === "465",
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
-      // Some hosting providers require this for security
       tls: {
         rejectUnauthorized: false,
       },
