@@ -1,26 +1,456 @@
+/* ============================================
+  Google Font Import — Space Grotesk + Manrope
+  ============================================ */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ============================================
+   Tailwind v4 Theme — Dark Color Palette
+   ============================================ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Background tones */
+  --color-bg-primary: #050505;
+  --color-bg-secondary: #0a0a0f;
+  --color-bg-card: #111118;
+  --color-bg-card-hover: #16161f;
+  --color-bg-elevated: #1a1a24;
+
+  /* Accent colors — electric violet / blue */
+  --color-accent-primary: #7c3aed;
+  --color-accent-secondary: #a78bfa;
+  --color-accent-glow: rgba(124, 58, 237, 0.4);
+  --color-accent-blue: #3b82f6;
+  --color-accent-cyan: #06b6d4;
+
+  /* Text colors */
+  --color-text-primary: #f0f0f5;
+  --color-text-secondary: #a1a1b5;
+  --color-text-muted: #6b6b80;
+
+  /* Border colors */
+  --color-border-default: #1e1e2e;
+  --color-border-hover: #2e2e42;
+  --color-border-accent: rgba(124, 58, 237, 0.3);
+
+  /* Fonts */
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================
+   Base Styles
+   ============================================ */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg-primary);
+  background-image:
+    radial-gradient(
+      520px circle at 12% 10%,
+      rgba(124, 58, 237, 0.16),
+      transparent 60%
+    ),
+    radial-gradient(
+      480px circle at 88% 4%,
+      rgba(6, 182, 212, 0.18),
+      transparent 55%
+    ),
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size:
+    auto,
+    auto,
+    48px 48px,
+    48px 48px;
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Custom Scrollbar
+   ============================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent-primary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-secondary);
+}
+
+/* ============================================
+   Selection Highlight
+   ============================================ */
+::selection {
+  background-color: rgba(124, 58, 237, 0.3);
+  color: #fff;
+}
+
+/* ============================================
+   Keyframe Animations
+   ============================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeUpSoft {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+@keyframes letter-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) rotateX(-90deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
+.animate-letter-reveal {
+  display: inline-block;
+  opacity: 0;
+  animation: letter-reveal 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes text-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-text-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-accent-primary),
+    var(--color-accent-cyan),
+    var(--color-accent-blue),
+    var(--color-accent-primary)
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shimmer 4s linear infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* ============================================
+   Animation Utility Classes
+   ============================================ */
+.animate-typing {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid var(--color-accent-primary);
+  animation:
+    typing 3.5s steps(40, end),
+    blink 0.75s step-end infinite;
+}
+
+.animate-bounce {
+  animation: bounce 2s infinite;
+}
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+.animate-slide-right {
+  animation: slideRight 0.6s ease-out forwards;
+}
+
+.animate-fade-up-soft {
+  animation: fadeUpSoft 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+.hero-name {
+  animation: name-reveal 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.hero-name-emphasis {
+  display: inline-block;
+  animation: name-glow 2.4s ease-in-out 0.6s infinite;
+}
+
+/* ============================================
+   Typography Enhancements
+   ============================================ */
+.font-display {
+  font-family: "Space Grotesk", "Manrope", ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(124, 58, 237, 0.05),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.section-underline {
+  background-size: 200% 200%;
+  animation:
+    gradient-shift 10s ease infinite,
+    scaleIn 0.8s ease-out forwards;
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.3);
+  transform-origin: center;
+}
+
+/* Staggered animation delays */
+.delay-100 {
+  animation-delay: 0.1s;
+}
+.delay-200 {
+  animation-delay: 0.2s;
+}
+.delay-300 {
+  animation-delay: 0.3s;
+}
+.delay-400 {
+  animation-delay: 0.4s;
+}
+.delay-500 {
+  animation-delay: 0.5s;
+}
+.delay-600 {
+  animation-delay: 0.6s;
+}
+.delay-700 {
+  animation-delay: 0.7s;
+}
+
+/* Start invisible for animated elements */
+.animate-on-scroll {
+  opacity: 0;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+}
+
+/* ============================================
+   Glass Morphism Card
+   ============================================ */
+.glass-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    rgba(17, 17, 24, 0.78),
+    rgba(17, 17, 24, 0.6)
+  );
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(124, 58, 237, 0.18);
+  transition: all 0.3s ease;
+}
+
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.08),
+    transparent 45%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.glass-card:hover {
+  border-color: rgba(124, 58, 237, 0.4);
+  background: rgba(22, 22, 31, 0.8);
+  box-shadow: 0 18px 50px rgba(2, 6, 23, 0.4);
+}
+
+.glass-card:hover::before {
+  opacity: 0.5;
+}
+
+/* ============================================
+   Gradient Text
+   ============================================ */
+.gradient-text {
+  background: linear-gradient(
+    135deg,
+    var(--color-accent-primary),
+    var(--color-accent-cyan)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   Decorative Gradient Orbs (Hero background)
+   ============================================ */
+.gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
 }
