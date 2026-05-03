@@ -55,7 +55,7 @@ export default function HomePage() {
   };
 
   const inputStyles =
-    "w-full px-4 py-3 rounded-xl bg-bg-elevated border border-border-default text-text-primary placeholder-text-muted text-sm focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary/50 transition-all duration-300";
+    "w-full px-4 py-3 [@media(max-height:700px)]:py-2 rounded-xl bg-bg-elevated border border-border-default text-text-primary placeholder-text-muted text-base focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary/50 transition-all duration-300";
 
   return (
     <>
@@ -64,16 +64,16 @@ export default function HomePage() {
           ================================================================ */}
       <section
         id="home"
-        className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden"
+        className="relative min-h-[calc(100vh-4rem)] [@media(max-height:700px)]:min-h-[500px] flex items-center justify-center overflow-hidden px-0"
       >
         {/* Decorative Background Gradient Orbs */}
         <div className="gradient-orb w-[500px] h-[500px] bg-accent-primary/20 top-[-10%] left-[-10%] animate-pulse-glow" />
         <div className="gradient-orb w-[400px] h-[400px] bg-accent-cyan/15 bottom-[-5%] right-[-5%] animate-pulse-glow delay-300" />
         <div className="gradient-orb w-[300px] h-[300px] bg-accent-blue/10 top-[40%] right-[20%] animate-float" />
 
-        {/* ── Profile Photo (top-right) ── */}
-        <div className="absolute top-6 right-6 sm:top-8 sm:right-8 z-10 animate-scale-in group">
-          <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden border-4 border-accent-primary/50 shadow-lg shadow-accent-glow transition-all duration-500 hover:scale-105 hover:border-accent-cyan hover:shadow-cyan-500/25">
+        {/* ── Profile Photo (top-right on sm+; inline on mobile) ── */}
+        <div className="absolute top-4 right-4 sm:top-8 sm:right-8 z-10 animate-scale-in group hidden sm:block">
+          <div className="relative w-48 h-48 md:w-56 md:h-56 lg:w-72 lg:h-72 xl:w-80 xl:h-80 rounded-full overflow-hidden border-4 border-accent-primary/50 shadow-lg shadow-accent-glow transition-all duration-500 hover:scale-105 hover:border-accent-cyan hover:shadow-cyan-500/25 [@media(max-height:700px)]:w-40 [@media(max-height:700px)]:h-40">
             <Image
               src="/images/Me.jpeg"
               alt="Abdul Moiz — Software Engineer"
@@ -85,9 +85,20 @@ export default function HomePage() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center md:pr-48 lg:pr-64 xl:pr-0">
+          <div className="sm:hidden mb-6 flex justify-center">
+            <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-accent-primary/50 shadow-lg shadow-accent-glow">
+              <Image
+                src="/images/Me.jpeg"
+                alt="Abdul Moiz — Software Engineer"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
           {/* Name with Robust Animation */}
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 leading-tight">
+          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl [@media(max-height:700px)]:text-5xl font-bold tracking-tight mb-4 leading-tight">
             <span className="inline-block animate-slide-right mr-2 sm:mr-3">
               Hi, I&apos;m
             </span>
@@ -98,16 +109,16 @@ export default function HomePage() {
 
           {/* Title & Role with Typing Animation */}
           <div className="flex justify-center mb-2">
-            <p className="animate-typing text-xl sm:text-2xl md:text-3xl text-text-secondary font-light">
+            <p className="animate-typing text-xl sm:text-2xl md:text-3xl [@media(max-height:700px)]:text-xl text-text-secondary font-light">
               Software Engineer
             </p>
           </div>
-          <p className="animate-slide-up delay-500 text-lg sm:text-xl text-text-muted mb-8">
+          <p className="animate-slide-up delay-500 text-lg sm:text-xl [@media(max-height:700px)]:text-base text-text-muted mb-8 [@media(max-height:700px)]:mb-4">
             Full Stack Developer
           </p>
 
           {/* Professional summary */}
-          <p className="animate-slide-up delay-700 text-text-secondary text-base sm:text-lg leading-relaxed max-w-xl mx-auto mb-10">
+          <p className="animate-slide-up delay-700 text-text-secondary text-base sm:text-lg [@media(max-height:700px)]:text-sm leading-relaxed max-w-xl mx-auto mb-10 [@media(max-height:700px)]:mb-6">
             I build modern, performant web applications and AI-powered
             solutions. Passionate about clean code, beautiful interfaces, and
             solving real-world problems through technology.
@@ -120,6 +131,7 @@ export default function HomePage() {
               variant="primary"
               size="lg"
               id="cta-view-projects"
+              className="[@media(max-height:700px)]:py-3 [@media(max-height:700px)]:px-6 [@media(max-height:700px)]:text-sm"
             >
               <svg
                 width="18"
@@ -143,6 +155,7 @@ export default function HomePage() {
               variant="outline"
               size="lg"
               id="cta-contact-me"
+              className="[@media(max-height:700px)]:py-3 [@media(max-height:700px)]:px-6 [@media(max-height:700px)]:text-sm"
             >
               <svg
                 width="18"
@@ -162,7 +175,7 @@ export default function HomePage() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce hidden sm:block">
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce hidden sm:block [@media(max-height:700px)]:hidden">
           <a
             href="#projects"
             className="flex flex-col items-center gap-2 text-text-muted hover:text-accent-primary transition-colors duration-300"
@@ -189,7 +202,7 @@ export default function HomePage() {
       {/* ================================================================
           SECTION 2 — PROJECTS
           ================================================================ */}
-      <section id="projects" className="py-20 sm:py-28">
+      <section id="projects" className="py-16 sm:py-24 lg:py-28 [@media(max-height:700px)]:py-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimateOnScroll animation="animate-fade-up-soft">
             <SectionHeading
@@ -216,40 +229,41 @@ export default function HomePage() {
       {/* ================================================================
           SECTION 3 — ABOUT
           ================================================================ */}
-      <section id="about" className="py-20 sm:py-28">
+      <section id="about" className="py-16 sm:py-24 lg:py-28 [@media(max-height:700px)]:py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimateOnScroll animation="animate-fade-up-soft">
             <SectionHeading
               title="About Me"
               subtitle="A glimpse into who I am and what I do."
               id="about-heading"
+              className="[@media(max-height:700px)]:mb-8"
             />
           </AnimateOnScroll>
 
           {/* Introduction Card */}
           <AnimateOnScroll animation="animate-slide-up" delay="delay-100">
-            <div className="glass-card rounded-2xl p-8 mb-12">
-              <div className="flex items-start gap-4 mb-6">
+            <div className="glass-card rounded-2xl p-6 sm:p-8 mb-10 sm:mb-12 [@media(max-height:700px)]:mb-6 [@media(max-height:700px)]:p-5">
+              <div className="flex flex-col sm:flex-row sm:items-start gap-5 mb-6 [@media(max-height:700px)]:mb-4">
                 {/* Avatar with real photo */}
-                <div className="shrink-0 w-16 h-16 rounded-full overflow-hidden border-2 border-accent-primary/40">
+                <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 border-accent-primary/40 [@media(max-height:700px)]:w-16 [@media(max-height:700px)]:h-16">
                   <Image
                     src="/images/Me.jpeg"
                     alt="Abdul Moiz"
-                    width={64}
-                    height={64}
+                    width={96}
+                    height={96}
                     className="object-cover w-full h-full"
                   />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-text-primary">
+                  <h3 className="text-2xl font-semibold text-text-primary [@media(max-height:700px)]:text-lg">
                     Abdul Moiz
                   </h3>
-                  <p className="text-accent-secondary text-sm">
+                  <p className="text-accent-secondary text-base [@media(max-height:700px)]:text-xs">
                     Software Engineer &bull; Full Stack Developer
                   </p>
                 </div>
               </div>
-              <div className="space-y-4 text-text-secondary leading-relaxed">
+              <div className="space-y-4 text-text-secondary leading-relaxed [@media(max-height:700px)]:space-y-2 [@media(max-height:700px)]:text-xs">
                 <p>
                   I&apos;m a passionate Software Engineer who loves building
                   things that live on the internet. With a strong foundation in
@@ -277,28 +291,28 @@ export default function HomePage() {
 
           {/* Skills */}
           <AnimateOnScroll animation="animate-fade-in" delay="delay-200">
-            <h3 className="text-3xl sm:text-4xl font-bold text-text-primary mb-8 text-center">
+            <h3 className="text-3xl sm:text-4xl font-bold text-text-primary mb-8 text-center [@media(max-height:700px)]:text-2xl [@media(max-height:700px)]:mb-6">
               Skills &amp; Technologies
             </h3>
           </AnimateOnScroll>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             {skills.map((category, index) => (
               <AnimateOnScroll
                 key={category.category}
                 animation="animate-slide-up"
                 delay={`delay-${(index + 1) * 100}`}
               >
-                <div className="glass-card rounded-2xl p-6 h-full">
-                  <div className="flex items-center gap-3 mb-4">
+                <div className="glass-card rounded-2xl p-5 sm:p-6 h-full [@media(max-height:700px)]:p-4">
+                  <div className="flex items-center gap-3 mb-4 [@media(max-height:700px)]:mb-2">
                     <Image
                       src={category.image}
                       alt={`${category.category} icon`}
                       width={32}
                       height={32}
-                      className="shrink-0"
+                      className="shrink-0 [@media(max-height:700px)]:w-6 [@media(max-height:700px)]:h-6"
                     />
-                    <h4 className="text-xl font-semibold text-text-primary">
+                    <h4 className="text-xl font-semibold text-text-primary [@media(max-height:700px)]:text-lg">
                       {category.category}
                     </h4>
                   </div>
@@ -306,7 +320,7 @@ export default function HomePage() {
                     {category.items.map((skill) => (
                       <span
                         key={skill}
-                        className="px-3 py-1.5 text-sm font-medium rounded-lg bg-bg-elevated text-text-secondary border border-border-default hover:border-accent-primary/50 hover:text-accent-secondary hover:shadow-[0_0_10px_rgba(124,58,237,0.2)] hover:-translate-y-0.5 transition-all duration-300"
+                        className="px-3 py-1.5 text-sm font-medium rounded-lg bg-bg-elevated text-text-secondary border border-border-default hover:border-accent-primary/50 hover:text-accent-secondary hover:shadow-[0_0_10px_rgba(124,58,237,0.2)] hover:-translate-y-0.5 transition-all duration-300 [@media(max-height:700px)]:text-xs [@media(max-height:700px)]:px-2 [@media(max-height:700px)]:py-1"
                       >
                         {skill}
                       </span>
@@ -322,13 +336,14 @@ export default function HomePage() {
       {/* ================================================================
           SECTION 4 — CONTACT
           ================================================================ */}
-      <section id="contact" className="py-20 sm:py-28">
+      <section id="contact" className="py-16 sm:py-24 lg:py-28 [@media(max-height:700px)]:py-12">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimateOnScroll animation="animate-fade-up-soft">
             <SectionHeading
               title="Get In Touch"
               subtitle="Have a question or want to work together? Drop me a message and I'll get back to you as soon as possible."
               id="contact-heading"
+              className="[@media(max-height:700px)]:mb-8"
             />
           </AnimateOnScroll>
 
@@ -336,13 +351,13 @@ export default function HomePage() {
             <form
               onSubmit={handleSubmit}
               id="contact-form"
-              className="glass-card rounded-2xl p-6 sm:p-8 space-y-6"
+              className="glass-card rounded-2xl p-6 sm:p-8 space-y-6 [@media(max-height:700px)]:p-5 [@media(max-height:700px)]:space-y-3"
             >
               {/* Name */}
               <div>
                 <label
                   htmlFor="contact-name"
-                  className="block text-sm font-medium text-text-secondary mb-2"
+                  className="block text-sm font-medium text-text-secondary mb-2 [@media(max-height:700px)]:mb-1 [@media(max-height:700px)]:text-xs"
                 >
                   Name
                 </label>
@@ -363,7 +378,7 @@ export default function HomePage() {
               <div>
                 <label
                   htmlFor="contact-email"
-                  className="block text-sm font-medium text-text-secondary mb-2"
+                  className="block text-sm font-medium text-text-secondary mb-2 [@media(max-height:700px)]:mb-1 [@media(max-height:700px)]:text-xs"
                 >
                   Email
                 </label>
@@ -384,7 +399,7 @@ export default function HomePage() {
               <div>
                 <label
                   htmlFor="contact-message"
-                  className="block text-sm font-medium text-text-secondary mb-2"
+                  className="block text-sm font-medium text-text-secondary mb-2 [@media(max-height:700px)]:mb-1 [@media(max-height:700px)]:text-xs"
                 >
                   Message
                 </label>
@@ -396,7 +411,7 @@ export default function HomePage() {
                   required
                   rows={5}
                   placeholder="Tell me about your project or just say hello..."
-                  className={`${inputStyles} resize-none`}
+                  className={`${inputStyles} resize-none [@media(max-height:700px)]:h-32`}
                   suppressHydrationWarning
                 />
               </div>
@@ -407,7 +422,7 @@ export default function HomePage() {
                 variant="primary"
                 size="lg"
                 id="contact-submit"
-                className="w-full"
+                className="w-full [@media(max-height:700px)]:py-3"
                 disabled={isSubmitting}
                 suppressHydrationWarning
               >

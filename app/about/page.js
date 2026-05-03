@@ -17,7 +17,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <section id="about-page" className="py-20 sm:py-28">
+    <section id="about-page" className="py-16 sm:py-24 lg:py-28">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <AnimateOnScroll animation="animate-fade-up-soft">
@@ -30,8 +30,8 @@ export default function AboutPage() {
 
         {/* ---- Introduction ---- */}
         <AnimateOnScroll animation="animate-slide-up" delay="delay-100">
-          <div className="glass-card rounded-2xl p-8 mb-12">
-            <div className="flex items-start gap-4 mb-6">
+          <div className="glass-card rounded-2xl p-6 sm:p-8 mb-10 sm:mb-12">
+            <div className="flex flex-col sm:flex-row sm:items-start gap-4 mb-6">
               {/* Avatar placeholder — gradient circle with initials */}
               <div className="shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-accent-primary to-accent-cyan flex items-center justify-center text-white text-xl font-bold">
                 AM
@@ -77,14 +77,14 @@ export default function AboutPage() {
           </h3>
         </AnimateOnScroll>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           {skills.map((category, index) => (
             <AnimateOnScroll
               key={category.category}
               animation="animate-slide-up"
               delay={`delay-${(index + 1) * 100}`}
             >
-              <div className="glass-card rounded-2xl p-6 h-full">
+              <div className="glass-card rounded-2xl p-5 sm:p-6 h-full">
                 {/* Category header with image icon */}
                 <div className="flex items-center gap-3 mb-4">
                   <Image

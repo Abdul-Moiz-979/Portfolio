@@ -55,10 +55,10 @@ export default function ContactPage() {
 
   // Shared input styles
   const inputStyles =
-    "w-full px-4 py-3 rounded-xl bg-bg-elevated border border-border-default text-text-primary placeholder-text-muted text-sm focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary/50 transition-all duration-300";
+    "w-full px-4 py-3 rounded-xl bg-bg-elevated border border-border-default text-text-primary placeholder-text-muted text-base focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary/50 transition-all duration-300";
 
   return (
-    <section id="contact-page" className="py-20 sm:py-28">
+    <section id="contact-page" className="py-16 sm:py-24 lg:py-28">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <AnimateOnScroll animation="animate-fade-up-soft">

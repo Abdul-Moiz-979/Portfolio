@@ -2,14 +2,14 @@
  * SectionHeading Component
  * Reusable heading with gradient accent underline.
  */
-export default function SectionHeading({ title, subtitle, id }) {
+export default function SectionHeading({ title, subtitle, id, className = "" }) {
   return (
-    <div id={id} className="mb-12 text-center">
-      <h2 className="font-display text-3xl sm:text-4xl font-bold text-text-primary mb-3">
+    <div id={id} className={`mb-12 text-center ${className}`}>
+      <h2 className="font-display text-3xl sm:text-4xl font-bold text-text-primary mb-3 [@media(max-height:700px)]:text-2xl">
         {title}
       </h2>
       {subtitle && (
-        <p className="text-text-secondary text-base max-w-xl mx-auto">
+        <p className="text-text-secondary text-sm sm:text-base max-w-xl mx-auto [@media(max-height:700px)]:text-xs">
           {subtitle}
         </p>
       )}

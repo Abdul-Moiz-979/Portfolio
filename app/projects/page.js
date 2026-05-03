@@ -17,7 +17,7 @@ export const metadata = {
 
 export default function ProjectsPage() {
   return (
-    <section id="projects-page" className="py-20 sm:py-28">
+    <section id="projects-page" className="py-16 sm:py-24 lg:py-28">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <AnimateOnScroll animation="animate-fade-up-soft">
