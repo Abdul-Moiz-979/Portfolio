@@ -38,24 +38,16 @@ export async function POST(request) {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
+      // Some hosting providers require this for security
+      tls: {
+        rejectUnauthorized: false,
+      },
     });
-
-    // Verify connection configuration
-    try {
-      await transporter.verify();
-      console.log("✅ SMTP connection verified");
-    } catch (verifyError) {
-      console.error("❌ SMTP Verification Error:", verifyError);
-      return NextResponse.json(
-        { error: "Could not connect to email server. Check your credentials." },
-        { status: 500 }
-      );
-    }
 
     // Email content
     const mailOptions = {
-      from: `"${name}" <${process.env.EMAIL_USER}>`, // Best practice: send from your own authenticated email
-      replyTo: email, // Allow the recipient to reply to the user's email
+      from: `"${name}" <${process.env.EMAIL_USER}>`,
+      replyTo: email,
       to: process.env.EMAIL_TO,
       subject: `New Portfolio Message from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
@@ -71,7 +63,7 @@ export async function POST(request) {
       `,
     };
 
-    // Send the email
+    // Send the email directly (verify() is optional and can be slow in serverless)
     await transporter.sendMail(mailOptions);
 
     return NextResponse.json(
@@ -79,7 +71,11 @@ export async function POST(request) {
       { status: 200 }
     );
   } catch (error) {
-    console.error("Nodemailer error:", error);
+    console.error("Nodemailer Error Details:", {
+      message: error.message,
+      code: error.code,
+      command: error.command,
+    });
     return NextResponse.json(
       { error: "Failed to send message. Please try again later." },
       { status: 500 }
